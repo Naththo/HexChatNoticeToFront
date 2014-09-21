@@ -5,12 +5,8 @@ __module_version__ = "0.1"
 __module_description__ = "Prints notices to active window regardless of server"
 __author__ = "Nathan (nathh_)"
 
-
-current_tab = ""
-
 def processNotice(word, word_eol, userdata):
-	global current_tab
-	current_tab_name = current_tab.get_info
+	current_tab = hexchat.find_context()
 	if not current_tab:
 		return hexchat.EAT_NONE
 
@@ -27,13 +23,8 @@ def processNotice(word, word_eol, userdata):
 	return hexchat.EAT_ALL
 hexchat.hook_server("NOTICE", processNotice)
 
-def focusedTab(word, word_eol, userdata):
-	global current_tab
-	current_tab = hexchat.find_context(hexchat.get_info("network"))
-hexchat.hook_print("Focus Tab", focusedTab)
-
 def addon_unloaded(userdata):
 	print "\0034 %s (%s) unloaded." % (__module_name__, __module_version__)
 hexchat.hook_unload(addon_unloaded)
 
-print "\0034 %s (%s) loaded. You may need to reselect the tab of your choice to activate the plugin." % (__module_name__, __module_version__)
+print "\0034 %s (%s) loaded." % (__module_name__, __module_version__)
