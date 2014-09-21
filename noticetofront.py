@@ -1,5 +1,3 @@
-from pprint import pprint
-from string import Template
 import hexchat
 
 __module_name__ = "Notice to front"
