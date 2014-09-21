@@ -19,7 +19,13 @@ def processNotice(word, word_eol, userdata):
 	nick = word[0].split("!")[0].replace(":", "")
 	noticecontent = word[3][1:len(word[3])]
 	if nick and noticecontent:
-		current_tab.emit_print("Notice", nick, "(%s / %s): %s" % (hexchat.get_info("network"), hexchat.get_info("host"), noticecontent))
+		notice_network = hexchat.get_info("network")
+		notice_host = hexchat.get_info("host")
+		currenttab_network = current_tab.get_info("network")
+		if notice_network == currenttab_network:
+			current_tab.emit_print("Notice", nick, noticecontent)
+		else:
+			current_tab.emit_print("Notice", nick, "(%s / %s): %s" % (notice_network, notice_host, noticecontent))
 	return hexchat.EAT_ALL
 hexchat.hook_server("NOTICE", processNotice)
 
