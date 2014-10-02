@@ -11,7 +11,6 @@ def processNotice(word, word_eol, userdata):
 		return hexchat.EAT_NONE
 
 	nick = word[0].split("!")[0].replace(":", "")
-	#noticecontent = word[3][1:len(word[3])]
 	noticecontent = getnoticetext(word)
 	if nick and noticecontent:
 		notice_network = hexchat.get_info("network")
