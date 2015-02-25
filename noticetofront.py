@@ -24,13 +24,13 @@ def processNotice(word, word_eol, userdata):
 hexchat.hook_server("NOTICE", processNotice)
 
 def getnoticetext(noticedata):
-	current_word = 3
+	current_word = 3 # server, NOTICE, nick
 	notice_content = []
 	while current_word < len(noticedata):
 		if noticedata[current_word] == "":
 			continue
 
-		if noticedata[current_word][0] == ":":
+		if noticedata[current_word][0] == ":" and current_word == 3:
 			noticedata[current_word] = noticedata[current_word][1:]
 
 		notice_content.append(noticedata[current_word])
